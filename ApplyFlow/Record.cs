@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ApplyFlow
 {
-    internal class Record
+    public class Record
     {
         private string _status = "";
         private DateTime? _appliedDate;

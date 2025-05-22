@@ -21,8 +21,7 @@ namespace ApplyFlow
         private JobRepo jobRepo = new JobRepo();
         private EmployerRepo employerRepo = new EmployerRepo();
         private DocumentRepo documentRepo = new DocumentRepo();
-
-        private EmployerService employerService;
+        private EmployerService employerService = new EmployerService();
 
 
         // retrieve all application(s) for user
@@ -40,7 +39,7 @@ namespace ApplyFlow
                     int jobID = record.GetJobID();
 
                     // get job for application
-                    Job job = jobRepo.GetJob(jobID);
+                    Job job = jobRepo.GetJob(jobID); 
                     // get employer for job
                     Employer employer = employerRepo.GetEmployer(jobID);
                     // set employer industry
@@ -51,7 +50,6 @@ namespace ApplyFlow
                     Application application = new Application(record, job, employer, documents);
                     applications.Add(application);
                 }
-                //MessageBox.Show("getApps success");
                 return applications;
             }
             catch (Exception e)
@@ -66,18 +64,18 @@ namespace ApplyFlow
         {
             try
             {
-                employerService.InsertEmployerIfMissing(employer);
+                //employerService.InsertEmployerIfMissing(employer);
 
-                if (industries!= null)
-                {
-                    employerService.InsertIndustryIfMissing(industries);
-                    employerService.InsertEmployerIndustryIfMissing(industries, employer);
-                }
+                //if (industries.Count != 0)
+                //{
+                //    employerService.InsertIndustryIfMissing(industries);
+                //    employerService.InsertEmployerIndustryIfMissing(industries, employer);
+                //}
 
-                if (!jobRepo.JobExists(job.GetJobID()))
-                {
-                    jobRepo.InsertJob(job);
-                }
+                //if (!jobRepo.JobExists(job.GetJobID())) // change to job
+                //{
+                //    jobRepo.InsertJob(job);
+                //}
                 if (!recordRepo.RecordExists(job.GetJobID(), User.GetInstance().GetUsername()))
                 {
                     recordRepo.InsertRecord(record);
@@ -106,26 +104,25 @@ namespace ApplyFlow
             recordRepo.DeleteRecord(record.GetJobID(),User.GetInstance().GetUsername());
         }
 
-        // Move to different class?
-        public static string GetIndustryNames(List<string> industryList)
-        {
-            StringBuilder s = new StringBuilder();
-            foreach(string i in industryList)
-            {
-               s.Append(i + ", ");
-            }
-            return s.ToString();
-        }
+        //public static string GetIndustryNames(List<string> industryList)
+        //{
+        //    StringBuilder s = new StringBuilder();
+        //    foreach (string i in industryList)
+        //    {
+        //        s.Append(i + ", ");
+        //    }
+        //    return s.ToString();
+        //}
 
-        public static string GetFilenames(List<Document> docList)
-        {
-            StringBuilder s = new StringBuilder();
-            foreach (Document d in docList)
-            {
-                s.Append(d.GetFilename() + ", ");
-            }
-            return s.ToString();
-        }
+        //public static string GetFilenames(List<Document> docList)
+        //{
+        //    StringBuilder s = new StringBuilder();
+        //    foreach (Document d in docList)
+        //    {
+        //        s.Append(d.GetFilename() + ", ");
+        //    }
+        //    return s.ToString();
+        //}
 
     }
 }

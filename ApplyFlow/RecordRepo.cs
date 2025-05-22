@@ -19,13 +19,11 @@ namespace ApplyFlow
             {
                 string query = "SELECT * FROM Application WHERE username = :username";
                 Dictionary<string, object> parameters = new Dictionary<string, object>();
-                //parameters.Add(":username", username);
-                parameters.Add(":username", "alice123"); // testing
+                parameters.Add(":username", username);
                 DataTable result = dbManager.SelectQuery(query, parameters);
                 List<Record> records = new List<Record>();
                 foreach (DataRow row in result.Rows)
                 {
-                    // public ApplicationRecord(string status, DateTime appliedDate, int jobID)
                     string status = DatabaseManager.GetSafeString(row, "status");
                     DateTime appliedDate = Convert.ToDateTime(row["applied_date"]);
                     int jobID = Convert.ToInt32(row["job_id"]);
@@ -33,7 +31,6 @@ namespace ApplyFlow
                     Record record = new Record(status, appliedDate, jobID);
                     records.Add(record);
                 }
-               // MessageBox.Show("getRecords success");
                 return records;
             }
             catch (Exception ex)
@@ -51,11 +48,11 @@ namespace ApplyFlow
             try
             {
                 string query = "INSERT INTO Application (status, applied_date, job_id, username) VALUES (:status, :appliedDate, job_sequence.CURRVAL, :username)";
-                
                 Dictionary<string, object> parameters = new Dictionary<string, object>();
                 parameters.Add(":status", record.GetStatus());
                 parameters.Add(":appliedDate", record.GetAppliedDate());
-                parameters.Add(":jobID", record.GetJobID());
+                int id = record.GetJobID();
+                parameters.Add(":jobID", record.GetJobID()); // returning null ** to be fixed **
                 parameters.Add("username", User.GetInstance().GetUsername());
 
                 dbManager.ExecuteNonQuery(query, parameters);

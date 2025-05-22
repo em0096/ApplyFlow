@@ -3,11 +3,11 @@ using System.Windows.Forms;
 
 namespace ApplyFlow
 {
-    public partial class Login : Form
+    public partial class FormLogin : Form
     {
 
         private UserService userService = new UserService();
-        public Login()
+        public FormLogin()
         {
             InitializeComponent();
         }
@@ -19,9 +19,9 @@ namespace ApplyFlow
             if (userService.authenticateUser(username, password))
             {
                 User.GetInstance().SetUsername(username);
-                User.GetInstance().SetUsername(password);
+                User.GetInstance().SetPassword(password);
                 MessageBox.Show("Welcome " + username + ".", "ApplyFlow");
-                Home home = new Home();
+                FormHome home = new FormHome();
                 this.Hide();
                 home.Show(); // load home window
             }

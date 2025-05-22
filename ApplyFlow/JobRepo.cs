@@ -22,8 +22,7 @@ namespace ApplyFlow
             {
                 string query = "SELECT * FROM Job j WHERE id = :jobID";
                 Dictionary<string, object> parameters = new Dictionary<string, object>();
-                //parameters.Add(":jobID", jobID);
-                parameters.Add(":jobID", 1); // testing
+                parameters.Add(":jobID", jobID);
                 DataTable result = dbManager.SelectQuery(query, parameters);
                 Job job = null;
                 foreach (DataRow row in result.Rows)
@@ -57,7 +56,7 @@ namespace ApplyFlow
             {
                 string query = @"INSERT INTO Job (id, title, platform_found, salary, expiry_date, start_date, open_date, url, work_mode, score, company_name)
                     VALUES (job_sequence.NEXTVAL, :title, :platformFound, :salary, TO_DATE(:expiryDate, 'YYYY-MM-DD'), TO_DATE(:startDate, 'YYYY-MM-DD'), 
-                    TO_DATE(:openDate, 'YYYY-MM-DD'), :url, :workMode, :score, :companyName);\r\n";
+                    TO_DATE(:openDate, 'YYYY-MM-DD'), :url, :workMode, :score, :companyName)";
                 
                 Dictionary<string, object> parameters = new Dictionary<string, object>();
 
@@ -73,7 +72,6 @@ namespace ApplyFlow
                 parameters.Add(":companyName", job.GetCompany());
 
                 dbManager.ExecuteNonQuery(query, parameters);
-                //MessageBox.Show("insertjob success");
 
             }
             catch (Exception ex)

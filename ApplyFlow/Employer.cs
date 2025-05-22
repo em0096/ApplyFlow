@@ -2,7 +2,7 @@
 
 namespace ApplyFlow
 {
-    internal class Employer
+    public class Employer
     {
         private string _company = "";
         private string _website = "";

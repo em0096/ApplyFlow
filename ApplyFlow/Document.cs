@@ -2,7 +2,7 @@
 
 namespace ApplyFlow
 {
-    internal class Document
+    public class Document
     {
         private string _fileName = "";
         private string _filePath = "";

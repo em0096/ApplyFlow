@@ -1,6 +1,6 @@
 ﻿namespace ApplyFlow
 {
-    partial class Home
+    partial class FormHome
     {
         /// <summary>
         /// Required designer variable.
@@ -28,20 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridAppList = new System.Windows.Forms.DataGridView();
+            this.dataGridApplications = new System.Windows.Forms.DataGridView();
             this.buttonNewApplication = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridAppList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridApplications)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridAppList
+            // dataGridApplications
             // 
-            this.dataGridAppList.BackgroundColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.dataGridAppList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridAppList.GridColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.dataGridAppList.Location = new System.Drawing.Point(43, 92);
-            this.dataGridAppList.Name = "dataGridAppList";
-            this.dataGridAppList.Size = new System.Drawing.Size(1046, 427);
-            this.dataGridAppList.TabIndex = 0;
+            this.dataGridApplications.BackgroundColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.dataGridApplications.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridApplications.GridColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.dataGridApplications.Location = new System.Drawing.Point(43, 92);
+            this.dataGridApplications.Name = "dataGridApplications";
+            this.dataGridApplications.Size = new System.Drawing.Size(1046, 427);
+            this.dataGridApplications.TabIndex = 0;
             // 
             // buttonNewApplication
             // 
@@ -54,24 +54,24 @@
             this.buttonNewApplication.UseVisualStyleBackColor = true;
             this.buttonNewApplication.Click += new System.EventHandler(this.buttonNewApplication_Click);
             // 
-            // Home
+            // FormHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1123, 558);
             this.Controls.Add(this.buttonNewApplication);
-            this.Controls.Add(this.dataGridAppList);
-            this.Name = "Home";
+            this.Controls.Add(this.dataGridApplications);
+            this.Name = "FormHome";
             this.Text = "ApplyFlow";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridAppList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridApplications)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridAppList;
+        private System.Windows.Forms.DataGridView dataGridApplications;
         private System.Windows.Forms.Button buttonNewApplication;
     }
 }

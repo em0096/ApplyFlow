@@ -1,6 +1,6 @@
 ﻿namespace ApplyFlow
 {
-    partial class FormEditApplication
+    partial class FormViewApplication
     {
         /// <summary>
         /// Required designer variable.
@@ -28,10 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonDelete = new System.Windows.Forms.Button();
-            this.buttonSave = new System.Windows.Forms.Button();
-            this.labelEditApp = new System.Windows.Forms.Label();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonCreateNew = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.labelExpiryDate = new System.Windows.Forms.Label();
@@ -41,28 +39,23 @@
             this.textBoxPlatform = new System.Windows.Forms.TextBox();
             this.textBoxExpiryDate = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.buttonRemoveIndustry = new System.Windows.Forms.Button();
-            this.buttonAddIndustry = new System.Windows.Forms.Button();
-            this.textBoxIndustry = new System.Windows.Forms.TextBox();
             this.listBoxIndustryList = new System.Windows.Forms.ListBox();
             this.label9 = new System.Windows.Forms.Label();
             this.labelEmployerIndustry = new System.Windows.Forms.Label();
             this.textBoxCity = new System.Windows.Forms.TextBox();
             this.labelWebsite = new System.Windows.Forms.Label();
             this.textBoxWebsite = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelCountry = new System.Windows.Forms.Label();
             this.labelCity = new System.Windows.Forms.Label();
             this.labelCompany = new System.Windows.Forms.Label();
             this.textBoxCompany = new System.Windows.Forms.TextBox();
             this.textBoxCountry = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.buttonRemoveDoc = new System.Windows.Forms.Button();
+            this.textBoxStatus = new System.Windows.Forms.TextBox();
             this.listBoxDocuments = new System.Windows.Forms.ListBox();
             this.labelOpenDate = new System.Windows.Forms.Label();
             this.textBoxOpenDate = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboBoxStatus = new System.Windows.Forms.ComboBox();
-            this.buttonSelectDoc = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.labelIndustry = new System.Windows.Forms.Label();
@@ -71,9 +64,9 @@
             this.labelEndDate = new System.Windows.Forms.Label();
             this.textBoxAppliedDate = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBoxWorkMode = new System.Windows.Forms.TextBox();
             this.labelScore = new System.Windows.Forms.Label();
             this.textBoxScore = new System.Windows.Forms.TextBox();
-            this.comboBoxWorkMode = new System.Windows.Forms.ComboBox();
             this.labelWorkMode = new System.Windows.Forms.Label();
             this.labelStartDate = new System.Windows.Forms.Label();
             this.labelSalary = new System.Windows.Forms.Label();
@@ -88,56 +81,31 @@
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // buttonDelete
-            // 
-            this.buttonDelete.BackColor = System.Drawing.Color.White;
-            this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonDelete.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.buttonDelete.Location = new System.Drawing.Point(942, 561);
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(115, 44);
-            this.buttonDelete.TabIndex = 35;
-            this.buttonDelete.Text = "Delete";
-            this.buttonDelete.UseVisualStyleBackColor = false;
-            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
-            // 
-            // buttonSave
-            // 
-            this.buttonSave.BackColor = System.Drawing.Color.White;
-            this.buttonSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSave.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.buttonSave.Location = new System.Drawing.Point(1063, 560);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(117, 44);
-            this.buttonSave.TabIndex = 34;
-            this.buttonSave.Text = "Save";
-            this.buttonSave.UseVisualStyleBackColor = false;
-            this.buttonSave.Click += new System.EventHandler(this.buttonCreateNew_Click);
-            // 
-            // labelEditApp
-            // 
-            this.labelEditApp.AutoSize = true;
-            this.labelEditApp.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelEditApp.Location = new System.Drawing.Point(61, 27);
-            this.labelEditApp.Name = "labelEditApp";
-            this.labelEditApp.Size = new System.Drawing.Size(207, 26);
-            this.labelEditApp.TabIndex = 36;
-            this.labelEditApp.Text = "Edit Job Application";
-            // 
             // buttonCancel
             // 
             this.buttonCancel.BackColor = System.Drawing.Color.White;
-            this.buttonCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.buttonCancel.CausesValidation = false;
             this.buttonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCancel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.buttonCancel.Location = new System.Drawing.Point(810, 561);
+            this.buttonCancel.Location = new System.Drawing.Point(802, 426);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(126, 44);
-            this.buttonCancel.TabIndex = 37;
-            this.buttonCancel.Text = "Cancel";
+            this.buttonCancel.Size = new System.Drawing.Size(182, 44);
+            this.buttonCancel.TabIndex = 35;
+            this.buttonCancel.Text = "Back";
             this.buttonCancel.UseVisualStyleBackColor = false;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
+            // buttonCreateNew
+            // 
+            this.buttonCreateNew.BackColor = System.Drawing.Color.White;
+            this.buttonCreateNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCreateNew.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.buttonCreateNew.Location = new System.Drawing.Point(990, 426);
+            this.buttonCreateNew.Name = "buttonCreateNew";
+            this.buttonCreateNew.Size = new System.Drawing.Size(182, 44);
+            this.buttonCreateNew.TabIndex = 34;
+            this.buttonCreateNew.Text = "Edit";
+            this.buttonCreateNew.UseVisualStyleBackColor = false;
+            this.buttonCreateNew.Click += new System.EventHandler(this.buttonCreateNew_Click);
             // 
             // panel4
             // 
@@ -150,10 +118,10 @@
             this.panel4.Controls.Add(this.textBoxPlatform);
             this.panel4.Controls.Add(this.textBoxExpiryDate);
             this.panel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel4.Location = new System.Drawing.Point(66, 518);
+            this.panel4.Location = new System.Drawing.Point(59, 384);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(712, 86);
-            this.panel4.TabIndex = 41;
+            this.panel4.TabIndex = 33;
             // 
             // label6
             // 
@@ -171,9 +139,9 @@
             this.labelExpiryDate.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelExpiryDate.Location = new System.Drawing.Point(374, 19);
             this.labelExpiryDate.Name = "labelExpiryDate";
-            this.labelExpiryDate.Size = new System.Drawing.Size(89, 19);
+            this.labelExpiryDate.Size = new System.Drawing.Size(83, 19);
             this.labelExpiryDate.TabIndex = 22;
-            this.labelExpiryDate.Text = "Expiry Date *";
+            this.labelExpiryDate.Text = "Expiry Date ";
             // 
             // label5
             // 
@@ -186,9 +154,10 @@
             // 
             // textBoxURL
             // 
-            this.textBoxURL.ForeColor = System.Drawing.SystemColors.Menu;
+            this.textBoxURL.ForeColor = System.Drawing.SystemColors.WindowText;
             this.textBoxURL.Location = new System.Drawing.Point(28, 43);
             this.textBoxURL.Name = "textBoxURL";
+            this.textBoxURL.ReadOnly = true;
             this.textBoxURL.Size = new System.Drawing.Size(330, 26);
             this.textBoxURL.TabIndex = 2;
             // 
@@ -207,6 +176,7 @@
             this.textBoxPlatform.ForeColor = System.Drawing.SystemColors.Menu;
             this.textBoxPlatform.Location = new System.Drawing.Point(553, 43);
             this.textBoxPlatform.Name = "textBoxPlatform";
+            this.textBoxPlatform.ReadOnly = true;
             this.textBoxPlatform.Size = new System.Drawing.Size(150, 26);
             this.textBoxPlatform.TabIndex = 4;
             // 
@@ -215,70 +185,37 @@
             this.textBoxExpiryDate.ForeColor = System.Drawing.SystemColors.WindowText;
             this.textBoxExpiryDate.Location = new System.Drawing.Point(378, 43);
             this.textBoxExpiryDate.Name = "textBoxExpiryDate";
+            this.textBoxExpiryDate.ReadOnly = true;
             this.textBoxExpiryDate.Size = new System.Drawing.Size(150, 26);
             this.textBoxExpiryDate.TabIndex = 11;
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.panel3.Controls.Add(this.buttonRemoveIndustry);
-            this.panel3.Controls.Add(this.buttonAddIndustry);
-            this.panel3.Controls.Add(this.textBoxIndustry);
             this.panel3.Controls.Add(this.listBoxIndustryList);
             this.panel3.Controls.Add(this.label9);
             this.panel3.Controls.Add(this.labelEmployerIndustry);
             this.panel3.Controls.Add(this.textBoxCity);
             this.panel3.Controls.Add(this.labelWebsite);
             this.panel3.Controls.Add(this.textBoxWebsite);
-            this.panel3.Controls.Add(this.label2);
+            this.panel3.Controls.Add(this.labelCountry);
             this.panel3.Controls.Add(this.labelCity);
             this.panel3.Controls.Add(this.labelCompany);
             this.panel3.Controls.Add(this.textBoxCompany);
             this.panel3.Controls.Add(this.textBoxCountry);
             this.panel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel3.Location = new System.Drawing.Point(66, 234);
+            this.panel3.Location = new System.Drawing.Point(59, 223);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(712, 268);
-            this.panel3.TabIndex = 40;
-            // 
-            // buttonRemoveIndustry
-            // 
-            this.buttonRemoveIndustry.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonRemoveIndustry.Location = new System.Drawing.Point(445, 208);
-            this.buttonRemoveIndustry.Name = "buttonRemoveIndustry";
-            this.buttonRemoveIndustry.Size = new System.Drawing.Size(252, 39);
-            this.buttonRemoveIndustry.TabIndex = 37;
-            this.buttonRemoveIndustry.Text = "Remove";
-            this.buttonRemoveIndustry.UseVisualStyleBackColor = true;
-            this.buttonRemoveIndustry.Click += new System.EventHandler(this.buttonRemoveIndustry_Click);
-            // 
-            // buttonAddIndustry
-            // 
-            this.buttonAddIndustry.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAddIndustry.Location = new System.Drawing.Point(601, 35);
-            this.buttonAddIndustry.Name = "buttonAddIndustry";
-            this.buttonAddIndustry.Size = new System.Drawing.Size(97, 27);
-            this.buttonAddIndustry.TabIndex = 35;
-            this.buttonAddIndustry.Text = "Add";
-            this.buttonAddIndustry.UseVisualStyleBackColor = true;
-            this.buttonAddIndustry.Click += new System.EventHandler(this.buttonAddIndustry_Click);
-            // 
-            // textBoxIndustry
-            // 
-            this.textBoxIndustry.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxIndustry.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.textBoxIndustry.Location = new System.Drawing.Point(445, 36);
-            this.textBoxIndustry.Name = "textBoxIndustry";
-            this.textBoxIndustry.Size = new System.Drawing.Size(150, 26);
-            this.textBoxIndustry.TabIndex = 36;
+            this.panel3.Size = new System.Drawing.Size(712, 143);
+            this.panel3.TabIndex = 32;
             // 
             // listBoxIndustryList
             // 
             this.listBoxIndustryList.FormattingEnabled = true;
             this.listBoxIndustryList.ItemHeight = 20;
-            this.listBoxIndustryList.Location = new System.Drawing.Point(445, 80);
+            this.listBoxIndustryList.Location = new System.Drawing.Point(546, 44);
             this.listBoxIndustryList.Name = "listBoxIndustryList";
-            this.listBoxIndustryList.Size = new System.Drawing.Size(252, 104);
+            this.listBoxIndustryList.Size = new System.Drawing.Size(150, 84);
             this.listBoxIndustryList.TabIndex = 35;
             // 
             // label9
@@ -294,11 +231,11 @@
             // 
             this.labelEmployerIndustry.AutoSize = true;
             this.labelEmployerIndustry.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelEmployerIndustry.Location = new System.Drawing.Point(441, 10);
+            this.labelEmployerIndustry.Location = new System.Drawing.Point(542, 14);
             this.labelEmployerIndustry.Name = "labelEmployerIndustry";
-            this.labelEmployerIndustry.Size = new System.Drawing.Size(60, 19);
+            this.labelEmployerIndustry.Size = new System.Drawing.Size(69, 19);
             this.labelEmployerIndustry.TabIndex = 25;
-            this.labelEmployerIndustry.Text = "Industry";
+            this.labelEmployerIndustry.Text = "Industries";
             // 
             // textBoxCity
             // 
@@ -306,6 +243,7 @@
             this.textBoxCity.ForeColor = System.Drawing.SystemColors.WindowText;
             this.textBoxCity.Location = new System.Drawing.Point(22, 102);
             this.textBoxCity.Name = "textBoxCity";
+            this.textBoxCity.ReadOnly = true;
             this.textBoxCity.Size = new System.Drawing.Size(150, 26);
             this.textBoxCity.TabIndex = 3;
             // 
@@ -324,18 +262,19 @@
             this.textBoxWebsite.ForeColor = System.Drawing.SystemColors.WindowText;
             this.textBoxWebsite.Location = new System.Drawing.Point(191, 35);
             this.textBoxWebsite.Name = "textBoxWebsite";
-            this.textBoxWebsite.Size = new System.Drawing.Size(223, 26);
+            this.textBoxWebsite.ReadOnly = true;
+            this.textBoxWebsite.Size = new System.Drawing.Size(330, 26);
             this.textBoxWebsite.TabIndex = 9;
             // 
-            // label2
+            // labelCountry
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(15, 143);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 19);
-            this.label2.TabIndex = 26;
-            this.label2.Text = "Country *";
+            this.labelCountry.AutoSize = true;
+            this.labelCountry.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCountry.Location = new System.Drawing.Point(187, 80);
+            this.labelCountry.Name = "labelCountry";
+            this.labelCountry.Size = new System.Drawing.Size(63, 19);
+            this.labelCountry.TabIndex = 26;
+            this.labelCountry.Text = "Country ";
             // 
             // labelCity
             // 
@@ -343,9 +282,9 @@
             this.labelCity.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCity.Location = new System.Drawing.Point(18, 78);
             this.labelCity.Name = "labelCity";
-            this.labelCity.Size = new System.Drawing.Size(43, 19);
+            this.labelCity.Size = new System.Drawing.Size(37, 19);
             this.labelCity.TabIndex = 25;
-            this.labelCity.Text = "City *";
+            this.labelCity.Text = "City ";
             // 
             // labelCompany
             // 
@@ -353,36 +292,36 @@
             this.labelCompany.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCompany.Location = new System.Drawing.Point(19, 12);
             this.labelCompany.Name = "labelCompany";
-            this.labelCompany.Size = new System.Drawing.Size(78, 19);
+            this.labelCompany.Size = new System.Drawing.Size(72, 19);
             this.labelCompany.TabIndex = 18;
-            this.labelCompany.Text = "Company *";
+            this.labelCompany.Text = "Company ";
             // 
             // textBoxCompany
             // 
             this.textBoxCompany.ForeColor = System.Drawing.SystemColors.WindowText;
             this.textBoxCompany.Location = new System.Drawing.Point(22, 36);
             this.textBoxCompany.Name = "textBoxCompany";
+            this.textBoxCompany.ReadOnly = true;
             this.textBoxCompany.Size = new System.Drawing.Size(150, 26);
             this.textBoxCompany.TabIndex = 0;
             // 
             // textBoxCountry
             // 
             this.textBoxCountry.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.textBoxCountry.Location = new System.Drawing.Point(19, 165);
+            this.textBoxCountry.Location = new System.Drawing.Point(191, 102);
             this.textBoxCountry.Name = "textBoxCountry";
+            this.textBoxCountry.ReadOnly = true;
             this.textBoxCountry.Size = new System.Drawing.Size(150, 26);
             this.textBoxCountry.TabIndex = 0;
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.panel2.Controls.Add(this.buttonRemoveDoc);
+            this.panel2.Controls.Add(this.textBoxStatus);
             this.panel2.Controls.Add(this.listBoxDocuments);
             this.panel2.Controls.Add(this.labelOpenDate);
             this.panel2.Controls.Add(this.textBoxOpenDate);
             this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.comboBoxStatus);
-            this.panel2.Controls.Add(this.buttonSelectDoc);
             this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.labelIndustry);
@@ -391,27 +330,25 @@
             this.panel2.Controls.Add(this.labelEndDate);
             this.panel2.Controls.Add(this.textBoxAppliedDate);
             this.panel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel2.Location = new System.Drawing.Point(810, 79);
+            this.panel2.Location = new System.Drawing.Point(802, 68);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(370, 466);
-            this.panel2.TabIndex = 39;
+            this.panel2.Size = new System.Drawing.Size(370, 336);
+            this.panel2.TabIndex = 31;
             // 
-            // buttonRemoveDoc
+            // textBoxStatus
             // 
-            this.buttonRemoveDoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonRemoveDoc.Location = new System.Drawing.Point(188, 364);
-            this.buttonRemoveDoc.Name = "buttonRemoveDoc";
-            this.buttonRemoveDoc.Size = new System.Drawing.Size(151, 38);
-            this.buttonRemoveDoc.TabIndex = 38;
-            this.buttonRemoveDoc.Text = "Remove";
-            this.buttonRemoveDoc.UseVisualStyleBackColor = true;
-            this.buttonRemoveDoc.Click += new System.EventHandler(this.buttonRemoveDoc_Click);
+            this.textBoxStatus.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.textBoxStatus.Location = new System.Drawing.Point(32, 36);
+            this.textBoxStatus.Name = "textBoxStatus";
+            this.textBoxStatus.ReadOnly = true;
+            this.textBoxStatus.Size = new System.Drawing.Size(306, 26);
+            this.textBoxStatus.TabIndex = 35;
             // 
             // listBoxDocuments
             // 
             this.listBoxDocuments.FormattingEnabled = true;
             this.listBoxDocuments.ItemHeight = 20;
-            this.listBoxDocuments.Location = new System.Drawing.Point(30, 191);
+            this.listBoxDocuments.Location = new System.Drawing.Point(32, 177);
             this.listBoxDocuments.Name = "listBoxDocuments";
             this.listBoxDocuments.Size = new System.Drawing.Size(306, 144);
             this.listBoxDocuments.TabIndex = 34;
@@ -431,6 +368,7 @@
             this.textBoxOpenDate.ForeColor = System.Drawing.SystemColors.WindowText;
             this.textBoxOpenDate.Location = new System.Drawing.Point(32, 103);
             this.textBoxOpenDate.Name = "textBoxOpenDate";
+            this.textBoxOpenDate.ReadOnly = true;
             this.textBoxOpenDate.Size = new System.Drawing.Size(150, 26);
             this.textBoxOpenDate.TabIndex = 32;
             // 
@@ -438,38 +376,11 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(28, 165);
+            this.label4.Location = new System.Drawing.Point(28, 155);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(80, 19);
             this.label4.TabIndex = 31;
             this.label4.Text = "Documents";
-            // 
-            // comboBoxStatus
-            // 
-            this.comboBoxStatus.FormattingEnabled = true;
-            this.comboBoxStatus.Items.AddRange(new object[] {
-            "Saved",
-            "Applied",
-            "No-Response",
-            "Interview",
-            "Rejected",
-            "Accepted",
-            "Offered"});
-            this.comboBoxStatus.Location = new System.Drawing.Point(32, 36);
-            this.comboBoxStatus.Name = "comboBoxStatus";
-            this.comboBoxStatus.Size = new System.Drawing.Size(307, 28);
-            this.comboBoxStatus.TabIndex = 30;
-            // 
-            // buttonSelectDoc
-            // 
-            this.buttonSelectDoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSelectDoc.Location = new System.Drawing.Point(29, 364);
-            this.buttonSelectDoc.Name = "buttonSelectDoc";
-            this.buttonSelectDoc.Size = new System.Drawing.Size(153, 38);
-            this.buttonSelectDoc.TabIndex = 29;
-            this.buttonSelectDoc.Text = "Select";
-            this.buttonSelectDoc.UseVisualStyleBackColor = true;
-            this.buttonSelectDoc.Click += new System.EventHandler(this.buttonSelectDoc_Click);
             // 
             // label8
             // 
@@ -535,15 +446,16 @@
             this.textBoxAppliedDate.ForeColor = System.Drawing.SystemColors.WindowText;
             this.textBoxAppliedDate.Location = new System.Drawing.Point(188, 103);
             this.textBoxAppliedDate.Name = "textBoxAppliedDate";
+            this.textBoxAppliedDate.ReadOnly = true;
             this.textBoxAppliedDate.Size = new System.Drawing.Size(150, 26);
             this.textBoxAppliedDate.TabIndex = 14;
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.panel1.Controls.Add(this.textBoxWorkMode);
             this.panel1.Controls.Add(this.labelScore);
             this.panel1.Controls.Add(this.textBoxScore);
-            this.panel1.Controls.Add(this.comboBoxWorkMode);
             this.panel1.Controls.Add(this.labelWorkMode);
             this.panel1.Controls.Add(this.labelStartDate);
             this.panel1.Controls.Add(this.labelSalary);
@@ -553,10 +465,19 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.textBoxSalary);
             this.panel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel1.Location = new System.Drawing.Point(66, 79);
+            this.panel1.Location = new System.Drawing.Point(58, 68);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(712, 143);
-            this.panel1.TabIndex = 38;
+            this.panel1.TabIndex = 30;
+            // 
+            // textBoxWorkMode
+            // 
+            this.textBoxWorkMode.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.textBoxWorkMode.Location = new System.Drawing.Point(192, 103);
+            this.textBoxWorkMode.Name = "textBoxWorkMode";
+            this.textBoxWorkMode.ReadOnly = true;
+            this.textBoxWorkMode.Size = new System.Drawing.Size(150, 26);
+            this.textBoxWorkMode.TabIndex = 34;
             // 
             // labelScore
             // 
@@ -574,27 +495,15 @@
             this.textBoxScore.ForeColor = System.Drawing.Color.Navy;
             this.textBoxScore.Location = new System.Drawing.Point(24, 103);
             this.textBoxScore.Name = "textBoxScore";
+            this.textBoxScore.ReadOnly = true;
             this.textBoxScore.Size = new System.Drawing.Size(150, 26);
             this.textBoxScore.TabIndex = 32;
-            // 
-            // comboBoxWorkMode
-            // 
-            this.comboBoxWorkMode.FormattingEnabled = true;
-            this.comboBoxWorkMode.Items.AddRange(new object[] {
-            "Office",
-            "Flexible",
-            "Remote",
-            "Hybrid"});
-            this.comboBoxWorkMode.Location = new System.Drawing.Point(547, 34);
-            this.comboBoxWorkMode.Name = "comboBoxWorkMode";
-            this.comboBoxWorkMode.Size = new System.Drawing.Size(150, 28);
-            this.comboBoxWorkMode.TabIndex = 31;
             // 
             // labelWorkMode
             // 
             this.labelWorkMode.AutoSize = true;
             this.labelWorkMode.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelWorkMode.Location = new System.Drawing.Point(543, 14);
+            this.labelWorkMode.Location = new System.Drawing.Point(188, 81);
             this.labelWorkMode.Name = "labelWorkMode";
             this.labelWorkMode.Size = new System.Drawing.Size(82, 19);
             this.labelWorkMode.TabIndex = 21;
@@ -604,7 +513,7 @@
             // 
             this.labelStartDate.AutoSize = true;
             this.labelStartDate.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelStartDate.Location = new System.Drawing.Point(198, 14);
+            this.labelStartDate.Location = new System.Drawing.Point(357, 14);
             this.labelStartDate.Name = "labelStartDate";
             this.labelStartDate.Size = new System.Drawing.Size(72, 19);
             this.labelStartDate.TabIndex = 19;
@@ -614,7 +523,7 @@
             // 
             this.labelSalary.AutoSize = true;
             this.labelSalary.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSalary.Location = new System.Drawing.Point(368, 14);
+            this.labelSalary.Location = new System.Drawing.Point(357, 81);
             this.labelSalary.Name = "labelSalary";
             this.labelSalary.Size = new System.Drawing.Size(46, 19);
             this.labelSalary.TabIndex = 17;
@@ -626,15 +535,16 @@
             this.labelJobTitle.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelJobTitle.Location = new System.Drawing.Point(15, 14);
             this.labelJobTitle.Name = "labelJobTitle";
-            this.labelJobTitle.Size = new System.Drawing.Size(69, 19);
+            this.labelJobTitle.Size = new System.Drawing.Size(63, 19);
             this.labelJobTitle.TabIndex = 16;
-            this.labelJobTitle.Text = "Job Title *";
+            this.labelJobTitle.Text = "Job Title ";
             // 
             // textBoxStartDate
             // 
             this.textBoxStartDate.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.textBoxStartDate.Location = new System.Drawing.Point(202, 36);
+            this.textBoxStartDate.Location = new System.Drawing.Point(361, 36);
             this.textBoxStartDate.Name = "textBoxStartDate";
+            this.textBoxStartDate.ReadOnly = true;
             this.textBoxStartDate.Size = new System.Drawing.Size(150, 26);
             this.textBoxStartDate.TabIndex = 12;
             // 
@@ -642,9 +552,10 @@
             // 
             this.textBoxJobTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxJobTitle.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.textBoxJobTitle.Location = new System.Drawing.Point(23, 36);
+            this.textBoxJobTitle.Location = new System.Drawing.Point(19, 36);
             this.textBoxJobTitle.Name = "textBoxJobTitle";
-            this.textBoxJobTitle.Size = new System.Drawing.Size(150, 26);
+            this.textBoxJobTitle.ReadOnly = true;
+            this.textBoxJobTitle.Size = new System.Drawing.Size(323, 26);
             this.textBoxJobTitle.TabIndex = 3;
             // 
             // label1
@@ -659,26 +570,25 @@
             // textBoxSalary
             // 
             this.textBoxSalary.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.textBoxSalary.Location = new System.Drawing.Point(372, 36);
+            this.textBoxSalary.Location = new System.Drawing.Point(361, 103);
             this.textBoxSalary.Name = "textBoxSalary";
+            this.textBoxSalary.ReadOnly = true;
             this.textBoxSalary.Size = new System.Drawing.Size(150, 26);
             this.textBoxSalary.TabIndex = 1;
             // 
-            // FormEditApplication
+            // FormViewApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1238, 648);
+            this.ClientSize = new System.Drawing.Size(1235, 522);
+            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.buttonCreateNew);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.labelEditApp);
-            this.Controls.Add(this.buttonDelete);
-            this.Controls.Add(this.buttonSave);
-            this.Name = "FormEditApplication";
-            this.Text = " ";
+            this.Name = "FormViewApplication";
+            this.Text = "ApplyFlow";
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -688,16 +598,13 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button buttonDelete;
-        private System.Windows.Forms.Button buttonSave;
-        private System.Windows.Forms.Label labelEditApp;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button buttonCreateNew;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label labelExpiryDate;
@@ -707,15 +614,13 @@
         private System.Windows.Forms.TextBox textBoxPlatform;
         private System.Windows.Forms.TextBox textBoxExpiryDate;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button buttonAddIndustry;
-        private System.Windows.Forms.TextBox textBoxIndustry;
         private System.Windows.Forms.ListBox listBoxIndustryList;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label labelEmployerIndustry;
         private System.Windows.Forms.TextBox textBoxCity;
         private System.Windows.Forms.Label labelWebsite;
         private System.Windows.Forms.TextBox textBoxWebsite;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelCountry;
         private System.Windows.Forms.Label labelCity;
         private System.Windows.Forms.Label labelCompany;
         private System.Windows.Forms.TextBox textBoxCompany;
@@ -725,8 +630,6 @@
         private System.Windows.Forms.Label labelOpenDate;
         private System.Windows.Forms.TextBox textBoxOpenDate;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBoxStatus;
-        private System.Windows.Forms.Button buttonSelectDoc;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label labelIndustry;
@@ -737,7 +640,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label labelScore;
         private System.Windows.Forms.TextBox textBoxScore;
-        private System.Windows.Forms.ComboBox comboBoxWorkMode;
         private System.Windows.Forms.Label labelWorkMode;
         private System.Windows.Forms.Label labelStartDate;
         private System.Windows.Forms.Label labelSalary;
@@ -746,7 +648,7 @@
         private System.Windows.Forms.TextBox textBoxJobTitle;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxSalary;
-        private System.Windows.Forms.Button buttonRemoveIndustry;
-        private System.Windows.Forms.Button buttonRemoveDoc;
+        private System.Windows.Forms.TextBox textBoxStatus;
+        private System.Windows.Forms.TextBox textBoxWorkMode;
     }
 }

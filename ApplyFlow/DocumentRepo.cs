@@ -16,8 +16,7 @@ namespace ApplyFlow
             {
                 string query = "SELECT * FROM Document d WHERE d.job_id = (SELECT j.id FROM Job j WHERE j.id = :jobID)";
                 Dictionary<string, object> parameters = new Dictionary<string, object>();
-                //parameters.Add(":jobID", jobID);
-                parameters.Add(":jobID", 1); // testing
+                parameters.Add(":jobID", jobID);
                 DataTable result = dbManager.SelectQuery(query, parameters);
                 List<Document> docs = new List<Document>();
                 foreach(DataRow row in result.Rows)

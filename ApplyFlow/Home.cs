@@ -6,12 +6,12 @@ using System.Windows.Forms;
 
 namespace ApplyFlow
 {
-    public partial class Home : Form
+    public partial class FormHome : Form
     {
 
         private ApplicationService applicationService = new ApplicationService();
         //private User user = User.GetInstance();
-        public Home()
+        public FormHome()
         {
             InitializeComponent();
             LoadApplciations();
@@ -20,26 +20,28 @@ namespace ApplyFlow
         public void LoadApplciations()
         {
             List<Application> userApplications = applicationService.GetApplications();
-            //DataGridViewButtonColumn editButton = new DataGridViewButtonColumn();
-            //editButton.Name = "EditButton";
-            //editButton.HeaderText = "";
-            //editButton.Text = "Edit";
-            //editButton.UseColumnTextForButtonValue = true; // Shows the same text in all rows
-            //dataGridAppList.Columns.Add(editButton);
 
-            dataGridAppList.Columns.Add("jobTitle", "Job Title");
-            dataGridAppList.Columns.Add("company", "Company");
-            dataGridAppList.Columns.Add("status", "Status");
-            dataGridAppList.Columns.Add("score", "Interest");
-            dataGridAppList.Columns.Add("salary", "Salary");
-            dataGridAppList.Columns.Add("openDate", "Open Date");
-            dataGridAppList.Columns.Add("expiryDate", "Expiry Date");
-            dataGridAppList.Columns.Add("startDate", "Start Date");
-            dataGridAppList.Columns.Add("workMode", "Work Mode");
-            dataGridAppList.Columns.Add("document", "Document");
-            dataGridAppList.Columns.Add("industry", "Industry");
-            dataGridAppList.Columns.Add("platform", "Platform");
-            dataGridAppList.Columns.Add("url", "URL");
+            DataGridViewButtonColumn action = new DataGridViewButtonColumn();
+            action.Name = "action";
+            action.HeaderText = "Action";
+            action.Text = "View";
+            action.UseColumnTextForButtonValue = true; 
+            dataGridApplications.Columns.Add(action);
+            dataGridApplications.CellContentClick += viewButton_Click;   // add click event to cell
+
+            dataGridApplications.Columns.Add("jobTitle", "Job Title");
+            dataGridApplications.Columns.Add("company", "Company");
+            dataGridApplications.Columns.Add("status", "Status");
+            dataGridApplications.Columns.Add("score", "Interest");
+            dataGridApplications.Columns.Add("salary", "Salary");
+            dataGridApplications.Columns.Add("openDate", "Open Date");
+            dataGridApplications.Columns.Add("expiryDate", "Expiry Date");
+            dataGridApplications.Columns.Add("startDate", "Start Date");
+            dataGridApplications.Columns.Add("workMode", "Work Mode");
+            //dataGridApplications.Columns.Add("document", "Document");
+            ////dataGridApplications.Columns.Add("industry", "Industry");
+            //dataGridApplications.Columns.Add("platform", "Platform");
+            //dataGridApplications.Columns.Add("url", "URL");
 
             foreach (Application a in userApplications)
             {
@@ -52,21 +54,24 @@ namespace ApplyFlow
                 string status = record.GetStatus();
                 int? score = job.GetScore();
                 string salary = job.GetSalary();
-                DateTime? open = job.GetOpenDate();
-                DateTime? expiry = job.GetExpiryDate();
-                DateTime? start = job.GetStartDate();
+                string open = job.GetOpenDate()?.ToString("yyyy-MM-dd") ?? "";
+                string expiry = job.GetExpiryDate()?.ToString("yyyy-MM-dd") ?? "";
+                string start = job.GetStartDate()?.ToString("yyyy-MM-dd") ?? "";
                 string workmode = job.GetWorkMode();
 
-                // get file names of documents
-                string filenames = ApplicationService.GetFilenames(a.GetDocuments());
+                //// get file names of documents
+                //string filenames = ApplicationService.GetFilenames(a.GetDocuments());
 
-                // get employer industries
-                string industries = ApplicationService.GetIndustryNames(employer.GetIndustries());
+                //// get employer industries
+                //string industries = ApplicationService.GetIndustryNames(employer.GetIndustries());
 
                 string platform = job.GetPlatform();
                 string url = job.GetURL();
 
-                dataGridAppList.Rows.Add(title, company, status, score, salary, open, expiry, start, workmode, filenames, industries, platform, url);
+                //int index = dataGridApplications.Rows.Add(title, company, status, score, salary, open, expiry, start, workmode, filenames, industries, platform, url);
+                int index = dataGridApplications.Rows.Add(null, title, company, status, score, salary, open, expiry, start, workmode);
+                DataGridViewRow row = dataGridApplications.Rows[index];
+                row.Tag = a; // attach application to row
             }
         }
 
@@ -75,6 +80,19 @@ namespace ApplyFlow
             FormNewApplication newApplication = new FormNewApplication();
             this.Hide();
             newApplication.ShowDialog();
+        }
+
+        private void viewButton_Click(object sender, DataGridViewCellEventArgs e)
+        {
+            // check user clicked the action column e.g. the edit button column and that they didnt click the header row
+            if (e.ColumnIndex == dataGridApplications.Columns["action"].Index & e.RowIndex >= 0)
+            {
+                this.Hide();
+                DataGridViewRow selectedRow = dataGridApplications.Rows[e.RowIndex];
+                Application selectedApplication = selectedRow.Tag as Application; // extract applciation from row tag
+                FormViewApplication viewApplication = new FormViewApplication(selectedApplication);
+                viewApplication.ShowDialog();   
+            }
         }
     }
 }

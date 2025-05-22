@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApplyFlow
 {
-    internal class Application
+    public class Application
     {
         private Record _record = null;
         private Job _job = null;

@@ -2,7 +2,7 @@
 
 namespace ApplyFlow
 {
-    internal class Job
+    public class Job
     {
         private int _id = 0;
         private string _title = "";

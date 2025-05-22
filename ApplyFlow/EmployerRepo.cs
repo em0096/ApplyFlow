@@ -12,17 +12,16 @@ namespace ApplyFlow
 {
     internal class EmployerRepo
     {
-        DatabaseManager dbManager = new DatabaseManager();
+        private DatabaseManager dbManager = new DatabaseManager();
+        private Employer employer = new Employer(null, null, null, null);
         public Employer GetEmployer(int jobID)
         {
             try
             {
                 string query = "SELECT * FROM Employer e WHERE e.company_name = (SELECT j.company_name FROM Job j WHERE j.id = :jobID)";
                 Dictionary<string, object> parameters = new Dictionary<string, object>();
-                // parameters.Add(":jobID", jobID);
-                parameters.Add(":jobID", 1); // testing 
+                parameters.Add(":jobID", jobID);
                 DataTable result = dbManager.SelectQuery(query, parameters);
-                Employer employer = null;
                 foreach (DataRow row in result.Rows)
                 {
                     string company_name = row["company_name"].ToString();
@@ -31,7 +30,6 @@ namespace ApplyFlow
                     string country = DatabaseManager.GetSafeString(row, "country");
                     employer = new Employer(company_name, website, city, country);
                 }
-                //MessageBox.Show("getEmp success");
                 return employer;
             }
             catch(Exception ex)
@@ -66,8 +64,7 @@ namespace ApplyFlow
             {
                 string query = "SELECT i.industry_name FROM Employer_Industry i WHERE i.company_name = (SELECT j.company_name FROM Job j WHERE j.id = :jobID)";
                 Dictionary<string, object> parameters = new Dictionary<string, object>();
-                //parameters.Add(":jobID", jobID);
-                parameters.Add(":jobID", 1); // testing
+                parameters.Add(":jobID", jobID);
                 List<string> industries = new List<string>();
                 DataTable result = dbManager.SelectQuery(query, parameters);
                 foreach(DataRow row in result.Rows)

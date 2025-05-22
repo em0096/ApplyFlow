@@ -14,7 +14,7 @@ namespace ApplyFlow
 {
     public partial class FormNewApplication : Form
     {
-        private ApplicationService applicationService;
+        private ApplicationService applicationService = new ApplicationService();
         public FormNewApplication()
         {
             InitializeComponent();
@@ -26,8 +26,8 @@ namespace ApplyFlow
             string jobTitle = textBoxJobTitle.Text;
             string company = textBoxCompany.Text;
             string startInput= textBoxStartDate.Text;
-            int score = 0;
-            if (string.IsNullOrWhiteSpace(textBoxScore.Text))
+            int? score = 0;
+            if (!string.IsNullOrWhiteSpace(textBoxScore.Text))
             {
                 score = Convert.ToInt32(textBoxScore.Text);
             }
@@ -43,17 +43,17 @@ namespace ApplyFlow
             string openInput = textBoxOpenDate.Text;
             string appliedInput = textBoxAppliedDate.Text;
 
-            if (!CheckJobTitleNotEmpty(jobTitle) || !CheckCompanyNotEmpty(company))
+            if (checkIfEmpty(jobTitle) || checkIfEmpty(company) || checkIfEmpty(expiryInput) || checkIfEmpty(city) || checkIfEmpty(country))
             {
                 return;
             }
 
             DateTime? startDate = ParseDateFromInput(startInput, "Start Date");
-            DateTime? expiryDate = ParseDateFromInput(expiryInput, "Expiry Date");
+            DateTime? expiryDate = ParseDateFromInput(expiryInput, "Expiry Date"); 
             DateTime? openDate = ParseDateFromInput(openInput, "Open Date");
             DateTime? appliedDate = ParseDateFromInput(appliedInput, "Applied Date");
 
-            // check dates are resonable e.g. expiry after open
+            // check dates are resonable e.g. expiry after open 
 
             // get items from document list box 
             List<Document> docList = new List<Document>();
@@ -111,25 +111,15 @@ namespace ApplyFlow
             MessageBox.Show(dateLabel + " is in the wrong format. Please use " + format + ".", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return null;
         }
-        private bool CheckJobTitleNotEmpty(string title)
+        private bool checkIfEmpty(string input)
         {
-            bool notEmpty = true;
-            if (title == "")
+            bool isEmpty = false;
+            if (input == "")
             {
-                MessageBox.Show("Job title cannot be Empty.");
-                notEmpty = false;
+                MessageBox.Show("All fields marked with * are required. Please complete them before submitting.", "Form Incomplete");
+                isEmpty = true;
             }
-            return notEmpty;
-        }
-        private bool CheckCompanyNotEmpty(string company)
-        {
-            bool notEmpty = true;
-            if (company == "")
-            {
-                MessageBox.Show("Company name cannot be Empty.");
-                notEmpty = false;
-            }
-            return notEmpty;
+            return isEmpty;
         }
 
         private void buttonAddIndustry_Click(object sender, EventArgs e)
@@ -143,6 +133,23 @@ namespace ApplyFlow
                 return;
             }
             listBoxIndustryList.Items.Add(industry);
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FormHome home = new FormHome();
+            home.Show();
+        }
+
+        private void buttonRemoveIndustry_Click(object sender, EventArgs e)
+        {
+            listBoxIndustryList.Items.Remove(listBoxIndustryList.SelectedItem);
+        }
+
+        private void buttonRemoveDoc_Click(object sender, EventArgs e)
+        {
+            listBoxDocuments.Items.Remove(listBoxDocuments.SelectedItem);
         }
     }
 }
