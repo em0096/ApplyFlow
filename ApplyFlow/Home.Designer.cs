@@ -48,9 +48,9 @@
             this.dataGridApplications.BackgroundColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.dataGridApplications.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridApplications.GridColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.dataGridApplications.Location = new System.Drawing.Point(43, 92);
+            this.dataGridApplications.Location = new System.Drawing.Point(628, 92);
             this.dataGridApplications.Name = "dataGridApplications";
-            this.dataGridApplications.Size = new System.Drawing.Size(1046, 427);
+            this.dataGridApplications.Size = new System.Drawing.Size(461, 427);
             this.dataGridApplications.TabIndex = 0;
             this.dataGridApplications.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridApplications_CellContentClick);
             // 
