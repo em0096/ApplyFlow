@@ -20,7 +20,7 @@ namespace ApplyFlow
             {
                 User.GetInstance().SetUsername(username);
                 User.GetInstance().SetPassword(password);
-                MessageBox.Show("Welcome " + username + ".", "ApplyFlow");
+                //MessageBox.Show("Welcome " + username + ".", "ApplyFlow");
                 FormHome home = new FormHome();
                 this.Hide();
                 home.Show(); // load home window

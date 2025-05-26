@@ -97,5 +97,26 @@ namespace ApplyFlow
                 return false;
             }
         }
+
+        public List<string> GetAllPlatforms()
+        {
+            try
+            {
+                string query = "SELECT DISTINCT platform_found FROM job";
+                DataTable result = dbManager.SelectQuery(query);
+                List<string> platformList = new List<string>();
+                foreach (DataRow row in result.Rows)
+                {
+                    string platform = DatabaseManager.GetSafeString(row, "platform_found");
+                    platformList.Add(platform);
+                }
+                return platformList;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+        }
     }
 }
