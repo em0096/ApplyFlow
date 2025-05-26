@@ -9,7 +9,34 @@ namespace ApplyFlow
     {
         DatabaseManager dbManager = new DatabaseManager();
 
-        // get all application documents 
+        // Get all user documents
+        public List<Document> GetUserDocuments()
+        {
+            try
+            {
+                string query = "SELECT DISTINCT file_name, file_path FROM Document WHERE username = :username";
+                Dictionary<string, object> parameters = new Dictionary<string, object>();
+                parameters.Add(":username", User.GetInstance().GetUsername());
+                DataTable result = dbManager.SelectQuery(query, parameters);
+                List<Document> docs = new List<Document>();
+                foreach (DataRow row in result.Rows)
+                {
+                    string filename = DatabaseManager.GetSafeString(row, "file_name");
+                    string filepath = DatabaseManager.GetSafeString(row, "file_path");
+                    //string username = DatabaseManager.GetSafeString(row, "username");
+                    Document doc = new Document(filename, filepath);
+                    docs.Add(doc);
+                }
+                return docs;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+        }
+        // get documents for application
         public List<Document> GetDocuments(int jobID)
         {
             try

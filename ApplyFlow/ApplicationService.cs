@@ -59,34 +59,37 @@ namespace ApplyFlow
             }
         }
 
-
         public bool InsertApplication(Employer employer, List<string> industries, Job job, List<Document> documents, Record record)
         {
             try
             {
-                //employerService.InsertEmployerIfMissing(employer);
+                employerService.InsertEmployerIfMissing(employer);
 
-                //if (industries.Count != 0)
-                //{
-                //    employerService.InsertIndustryIfMissing(industries);
-                //    employerService.InsertEmployerIndustryIfMissing(industries, employer);
-                //}
-
-                //if (!jobRepo.JobExists(job.GetJobID())) // change to job
-                //{
-                //    jobRepo.InsertJob(job);
-                //}
-                if (!recordRepo.RecordExists(job.GetJobID(), User.GetInstance().GetUsername()))
+                if (industries.Count != 0)
                 {
-                    recordRepo.InsertRecord(record);
+                    employerService.InsertIndustryIfMissing(industries);
+                    employerService.InsertEmployerIndustryIfMissing(industries, employer);
                 }
-                else { return false; }
+                if (!jobRepo.JobExists(job.GetCompany(), job.GetTitle(), job.GetExpiryDate()))
+                {
+                    jobRepo.InsertJob(job);
+                    MessageBox.Show("Job " + job.GetTitle() + " inserted."); //testing
+                }
+                else { MessageBox.Show("Job " + job.GetTitle() + " already exists"); } // testing 
+
+
+                if (recordRepo.RecordExists(job.GetCompany(), job.GetTitle(), job.GetExpiryDate(), User.GetInstance().GetUsername()))
+                {
+                    return false;
+                } 
+
+                recordRepo.InsertRecord(record, job); 
 
                 if (documents != null)
                 {
                     foreach (Document d in documents)
                     {
-                        documentRepo.InsertDocumet(job.GetJobID(), record.GetAppliedDate(), d.GetFilename());
+                        documentRepo.InsertDocumet(job.GetJobID(), record.GetAppliedDate(), d.GetFileName());
                     }
                 }
                 return true;
@@ -98,11 +101,11 @@ namespace ApplyFlow
             }
         }
 
-        public void DeleteApplication(Record record, Document document)
-        {
-            documentRepo.DeleteDocument(User.GetInstance().GetUsername(), record.GetJobID());
-            recordRepo.DeleteRecord(record.GetJobID(),User.GetInstance().GetUsername());
-        }
+        //public void DeleteApplication(Record record, Document document)
+        //{
+        //    documentRepo.DeleteDocument(User.GetInstance().GetUsername(), record.GetJobID());
+        //    recordRepo.DeleteRecord(record.GetJobID(),User.GetInstance().GetUsername());
+        //}
 
         //public static string GetIndustryNames(List<string> industryList)
         //{

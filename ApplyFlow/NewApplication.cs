@@ -9,148 +9,246 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ApplyFlow
 {
     public partial class FormNewApplication : Form
     {
-        private ApplicationService applicationService = new ApplicationService();
+        private ApplicationService _applicationService = new ApplicationService();
+        private EmployerService _employerService = new EmployerService();
+        private DocumentService _documentService= new DocumentService();
+        private JobService _jobService = new JobService();  
+
+        private List<Document> _userDocuments = new List<Document>();
+
+        private List<Document> _selectedDocList = new List<Document>();
+        private List<string> _selectedIndustryList = new List<string>();
+
+        private bool _isComboLoading = true;
         public FormNewApplication()
         {
             InitializeComponent();
-            
+            PopulateIndustryComboBox();
+            PopulateDocumentComboBox();
+            PopulatePlatformComboBox();
         }
 
         private void buttonCreateNew_Click(object sender, EventArgs e)
         {
-            string jobTitle = textBoxJobTitle.Text;
-            string company = textBoxCompany.Text;
-            string startInput= textBoxStartDate.Text;
-            int? score = 0;
-            if (!string.IsNullOrWhiteSpace(textBoxScore.Text))
-            {
-                score = Convert.ToInt32(textBoxScore.Text);
-            }
-            string salary = textBoxSalary.Text;
-            string workMode = comboBoxWorkMode.SelectedItem?.ToString();
-            string city = textBoxCity.Text;
-            string country = textBoxCountry.Text;
-            string website = textBoxWebsite.Text;
-            string url = textBoxURL.Text;
-            string expiryInput = textBoxExpiryDate.Text;
-            string platform = textBoxPlatform.Text;
-            string status = comboBoxStatus.SelectedItem?.ToString();
-            string openInput = textBoxOpenDate.Text;
-            string appliedInput = textBoxAppliedDate.Text;
 
-            if (checkIfEmpty(jobTitle) || checkIfEmpty(company) || checkIfEmpty(expiryInput) || checkIfEmpty(city) || checkIfEmpty(country))
+            string jobTitle = textBoxJobTitle.Text.Trim();
+            string company = textBoxCompany.Text.Trim();
+
+            if (jobTitle == "" || company == "" || !pickerExpiry.Checked)
+            {
+                MessageBox.Show("All fields marked with * are required. Please complete them before submitting.", "Form Incomplete");
+                return;
+            }
+
+            DateTime expiryDate = pickerExpiry.Value;
+            DateTime? openDate = pickerOpen.Checked ? pickerOpen.Value : (DateTime?)null;
+            DateTime? startDate = pickerStart.Checked ? pickerStart.Value : (DateTime?)null;
+            DateTime appliedDate = pickerApplied.Checked ? pickerApplied.Value : DateTime.Today;
+
+            if(!ValidateDateInput(openDate, appliedDate, expiryDate, startDate))
             {
                 return;
             }
 
-            DateTime? startDate = ParseDateFromInput(startInput, "Start Date");
-            DateTime? expiryDate = ParseDateFromInput(expiryInput, "Expiry Date"); 
-            DateTime? openDate = ParseDateFromInput(openInput, "Open Date");
-            DateTime? appliedDate = ParseDateFromInput(appliedInput, "Applied Date");
+            int? score = null;
 
-            // check dates are resonable e.g. expiry after open 
-
-            // get items from document list box 
-            List<Document> docList = new List<Document>();
-            foreach (string s in listBoxDocuments.Items)
+            if (comboBoxScore.SelectedItem != null)
             {
-                string[] temp = s.Split(',');
-                string filename = temp[0];
-                string filepath = temp[1];
-                Document doc = new Document(filename, filepath);
-                docList.Add(doc);   
+                score = Convert.ToInt32(comboBoxScore.SelectedItem.ToString());
             }
 
-            // get items from industry list box 
-            List<string> industryList = new List<string>();
-            foreach(string s in listBoxIndustryList.Items)
-            {
-                industryList.Add(s);
-            }
+            string salary = comboBoxSalary.SelectedItem?.ToString().Trim();
+            string workMode = comboBoxWorkMode.SelectedItem?.ToString().Trim();
+            string city = textBoxCity.Text.Trim();
+            string country = textBoxCountry.Text.Trim();
+            string website = textBoxWebsite.Text.Trim();
+            string url = textBoxURL.Text.Trim();
+            string platform = textBoxPlatform.Text.Trim();
+            string status = comboBoxStatus.SelectedItem?.ToString().Trim();
 
             Employer employer = new Employer(company, website, city, country);
             Job job = new Job(0, jobTitle, company, score, salary, openDate, expiryDate, startDate, workMode, url, platform);
             Record record = new Record(status, appliedDate, 0);
-            applicationService.InsertApplication(employer, industryList, job, docList, record);
 
+            if (_applicationService.InsertApplication(employer, _selectedIndustryList, job, _selectedDocList, record)) 
+            {
+                MessageBox.Show("Application Saved.");
+                ReturnHome();
+                return;
+            }
+            MessageBox.Show("You have already applied for this job.");
         }
 
+        // Check date inputs are reasonable 
+        public bool ValidateDateInput(DateTime? openDate, DateTime? appliedDate, DateTime? expiryDate, DateTime? startDate)
+        {
+            // Applied date is required
+            if (appliedDate > DateTime.Now)
+            {
+                MessageBox.Show("Applied date cannot be in the future.");
+                return false;
+            }
+
+            if (expiryDate.HasValue && expiryDate < DateTime.Today)
+            {
+                MessageBox.Show("Expiry date cannot be in the past.");
+                return false;
+            }
+
+            if (startDate.HasValue && startDate < DateTime.Today)
+            {
+                MessageBox.Show("Start date must be in the future.");
+                return false;
+            }
+
+            if (openDate.HasValue && appliedDate < openDate)
+            {
+                MessageBox.Show("Applied date cannot be before the open date.");
+                return false;
+            }
+
+            if (expiryDate.HasValue && appliedDate > expiryDate)
+            {
+                MessageBox.Show("Applied date cannot be after the expiry date.");
+                return false;
+            }
+
+            if (expiryDate.HasValue && startDate.HasValue && expiryDate > startDate)
+            {
+                MessageBox.Show("Start date must be after expiry date.");
+                return false;
+            }
+
+            return true;
+        }
         private void buttonSelectDoc_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                string selectedFilePath = openFileDialog.FileName;
-                string selectedFilename = Path.GetFileNameWithoutExtension(selectedFilePath);
-                if (listBoxDocuments.Items.Contains(selectedFilename + ", " + selectedFilePath))
+
+                string filePath = openFileDialog.FileName;
+                string fileName = Path.GetFileNameWithoutExtension(filePath);
+                Document selectedDoc = new Document(fileName, filePath);
+                if (IsDuplicate(selectedDoc))
                 {
-                    MessageBox.Show("That item is already in the list.", "Duplicate Item");
                     return;
                 }
-                listBoxDocuments.Items.Add(selectedFilename + ", " + selectedFilePath);
+                _selectedDocList.Add(selectedDoc);
+                UpdateDocumentListBox();
             }
         }
 
-        public DateTime? ParseDateFromInput(string dateInput, string dateLabel)
+        private void comboBoxDoc_Select(object sender, EventArgs e)
         {
-            string format = "dd/MM/yyyy";
-            if (string.IsNullOrWhiteSpace(dateInput))
+            Document selectedDoc = comboBoxDoc.SelectedItem as Document;
+
+            if (_isComboLoading || string.IsNullOrWhiteSpace(selectedDoc.GetFileName())) return; // check if window loading or doc is empty
+
+            if (IsDuplicate(selectedDoc))
             {
-                return null; // no user input
+                return;
             }
-            if (DateTime.TryParseExact(dateInput, format, CultureInfo.InvariantCulture,DateTimeStyles.None, out DateTime parsedDate))
-            {
-                return parsedDate;
-            }
-            MessageBox.Show(dateLabel + " is in the wrong format. Please use " + format + ".", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            return null;
+            _selectedDocList.Add(selectedDoc);
+            UpdateDocumentListBox();
         }
-        private bool checkIfEmpty(string input)
+
+        private void UpdateDocumentListBox()
         {
-            bool isEmpty = false;
-            if (input == "")
+            listBoxDocuments.DataSource = null;
+            listBoxDocuments.DataSource = _selectedDocList;
+        }
+        private void UpdateIndustryListBox()
+        {
+            listBoxIndustryList.DataSource = null;
+            listBoxIndustryList.DataSource = _selectedIndustryList;
+        }
+        private bool IsDuplicate(Document doc)
+        {
+            if (_selectedDocList.Contains(doc))
             {
-                MessageBox.Show("All fields marked with * are required. Please complete them before submitting.", "Form Incomplete");
-                isEmpty = true;
+                MessageBox.Show("That file is already in the list.", "Duplicate File");
+                return true;
             }
-            return isEmpty;
+            return false;
         }
 
         private void buttonAddIndustry_Click(object sender, EventArgs e)
         {
-            // get industry from textbox
-            string industry = textBoxIndustry.Text;
+            string selectedText = comboBoxIndustry.Text.Trim();
 
-            // add to listbox
-            if (listBoxIndustryList.Items.Contains(industry)) {
-                MessageBox.Show("That item is already in the list.", "Duplicate Item");
+            if (string.IsNullOrWhiteSpace(selectedText))
+                return;
+
+            if (_selectedIndustryList.Contains(selectedText))
+            {
+                MessageBox.Show("That industry is already in the list.", "Duplicate Industry");
                 return;
             }
-            listBoxIndustryList.Items.Add(industry);
+
+            _selectedIndustryList.Add(selectedText);
+            UpdateIndustryListBox();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            ReturnHome();
+        }
+
+        private void buttonRemoveIndustry_Click(object sender, EventArgs e)
+        {
+            _selectedIndustryList.Remove(comboBoxIndustry.Text.Trim());
+            UpdateIndustryListBox();
+        }
+
+        private void buttonRemoveDoc_Click(object sender, EventArgs e)
+        {
+            _selectedDocList.Remove(comboBoxDoc.SelectedItem as Document);
+            UpdateDocumentListBox();
+        }
+        public void ReturnHome()
         {
             this.Hide();
             FormHome home = new FormHome();
             home.Show();
         }
-
-        private void buttonRemoveIndustry_Click(object sender, EventArgs e)
+        public void PopulateIndustryComboBox()
         {
-            listBoxIndustryList.Items.Remove(listBoxIndustryList.SelectedItem);
+            foreach (string i in _employerService.GetIndustryList())
+            {
+                comboBoxIndustry.Items.Add(i);
+            }
         }
 
-        private void buttonRemoveDoc_Click(object sender, EventArgs e)
+        public void PopulateDocumentComboBox()
         {
-            listBoxDocuments.Items.Remove(listBoxDocuments.SelectedItem);
+            _isComboLoading = true;
+            Document dummy = new Document("","");
+            _userDocuments.Add(dummy);
+            _userDocuments.AddRange(_documentService.GetUserDocuments());
+            comboBoxDoc.DataSource = _userDocuments;
+            _isComboLoading = false;
         }
+
+        public void PopulatePlatformComboBox()
+        {
+            foreach (string p in _jobService.GetPlatformList())
+            {
+                if (p != "")
+                {
+                    comboBoxPlatform.Items.Add(p);
+                }
+            }
+        }
+
+
     }
 }
 

@@ -56,8 +56,30 @@ namespace ApplyFlow
                 return false;
             }
         }
+        // get every industry
+        public List<string> GetAllIndustries()
+        {
+            try
+            {
+                string query = "SELECT * FROM Industry";
+                List<string> industries = new List<string>();
+                DataTable result = dbManager.SelectQuery(query);
+                foreach (DataRow row in result.Rows)
+                {
+                    string industry = row["name"].ToString();
+                    industries.Add(industry);
+                }
+                return industries;
 
-        // get industry for employer
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+        }
+
+        // get list of employer industries 
         public List<string> GetEmployerIndustries(int jobID)
         {
             try
@@ -120,8 +142,8 @@ namespace ApplyFlow
             {
                 string query = "INSERT INTO Employer_Industry (company_name, industry_name) VALUES (:companyName, :industryName)";
                 Dictionary<string, object> parameters = new Dictionary<string, object>();
-                parameters.Add(":industryName", industry);
                 parameters.Add(":companyName", companyName);
+                parameters.Add(":industryName", industry);
 
                 dbManager.ExecuteNonQuery(query, parameters);
             }

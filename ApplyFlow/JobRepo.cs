@@ -55,8 +55,7 @@ namespace ApplyFlow
             try
             {
                 string query = @"INSERT INTO Job (id, title, platform_found, salary, expiry_date, start_date, open_date, url, work_mode, score, company_name)
-                    VALUES (job_sequence.NEXTVAL, :title, :platformFound, :salary, TO_DATE(:expiryDate, 'YYYY-MM-DD'), TO_DATE(:startDate, 'YYYY-MM-DD'), 
-                    TO_DATE(:openDate, 'YYYY-MM-DD'), :url, :workMode, :score, :companyName)";
+                    VALUES (job_sequence.NEXTVAL, :title, :platformFound, :salary, :expiryDate, :startDate, :openDate, :url, :workMode, :score, :companyName)";
                 
                 Dictionary<string, object> parameters = new Dictionary<string, object>();
 
@@ -80,21 +79,43 @@ namespace ApplyFlow
             }
         }
 
-        public bool JobExists(int jobID)
+        public bool JobExists(string company, string jobTitle, DateTime? expiryDate)
         {
             try
             {
-                string query = "SELECT 1 FROM Job WHERE id = :jobID";
+                string query = "SELECT 1 FROM job j WHERE LOWER(j.title) = LOWER(:jobTitle) AND LOWER(j.company_name) = LOWER(:company) AND TRUNC(j.expiry_date) = :expiryDate";
                 Dictionary<string, object> parameters = new Dictionary<string, object>();
-                parameters.Add(":jobID", jobID);
+                parameters.Add(":jobTitle", jobTitle);
+                parameters.Add(":company", company);
+                parameters.Add(":expiryDate", expiryDate.Value.Date);
                 DataTable result = dbManager.SelectQuery(query, parameters);
                 return result.Rows.Count > 0;
-
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 return false;
+            }
+        }
+
+        public List<string> GetAllPlatforms()
+        {
+            try
+            {
+                string query = "SELECT DISTINCT platform_found FROM job";
+                DataTable result = dbManager.SelectQuery(query);
+                List<string> platformList = new List<string>();
+                foreach (DataRow row in result.Rows)
+                {
+                    string platform = DatabaseManager.GetSafeString(row, "platform_found");
+                    platformList.Add(platform);
+                }
+                return platformList;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
             }
         }
     }

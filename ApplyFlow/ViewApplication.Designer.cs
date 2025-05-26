@@ -105,7 +105,7 @@
             this.buttonCreateNew.TabIndex = 34;
             this.buttonCreateNew.Text = "Edit";
             this.buttonCreateNew.UseVisualStyleBackColor = false;
-            this.buttonCreateNew.Click += new System.EventHandler(this.buttonCreateNew_Click);
+            //this.buttonCreateNew.Click += new System.EventHandler(this.buttonCreateNew_Click);
             // 
             // panel4
             // 

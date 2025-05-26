@@ -6,6 +6,7 @@ namespace ApplyFlow
     {
         private string _fileName = "";
         private string _filePath = "";
+
         //private int _jobID = 0;
         //private string _username = "";
         //private DateTime _appliedDate;
@@ -19,7 +20,7 @@ namespace ApplyFlow
             //_username = username;
         }
 
-        public string GetFilename()
+        public string GetFileName()
         {
             return _fileName;
         }
@@ -27,6 +28,10 @@ namespace ApplyFlow
         public string GetFilepath()
         {
             return _filePath;
+        }
+        public override string ToString()
+        {
+            return _fileName; 
         }
 
         //public DateTime GetAppliedDate()
