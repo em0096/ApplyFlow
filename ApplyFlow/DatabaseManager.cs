@@ -18,7 +18,29 @@ namespace ApplyFlow
         private OracleDataReader read;
         
          
-        // Query Database
+        // Select all query
+        public DataTable SelectQuery(string query)
+        {
+            try
+            {
+                using (connection = new OracleConnection(connectionString))
+                {
+                    command = new OracleCommand(query, connection);
+                    connection.Open();
+                    read = command.ExecuteReader();
+                    DataTable result = new DataTable();
+                    result.Load(read);
+                    return result;
+                }
+            }
+            catch(Exception ex) {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+        }
+
+        // Select with parameters
+
         public DataTable SelectQuery(string query, Dictionary<string, object> parameters)
         {
             try
@@ -40,7 +62,8 @@ namespace ApplyFlow
                     return result;
                 }
             }
-            catch(Exception ex) {
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message);
                 return null;
             }
@@ -64,7 +87,7 @@ namespace ApplyFlow
                     }
                     connection.Open();
                     int rowsAffected = command.ExecuteNonQuery();
-                    MessageBox.Show("Rows Affected: " + rowsAffected);
+                    //MessageBox.Show("Rows Affected: " + rowsAffected); // testing
                 }
             }
             catch (Exception ex)

@@ -93,15 +93,10 @@
     <Compile Include="DatabaseManager.cs" />
     <Compile Include="Document.cs" />
     <Compile Include="DocumentRepo.cs" />
+    <Compile Include="DocumentService.cs" />
     <Compile Include="Employer.cs" />
     <Compile Include="EmployerRepo.cs" />
     <Compile Include="EmployerService.cs" />
-    <Compile Include="EditApplication.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EditApplication.Designer.cs">
-      <DependentUpon>EditApplication.cs</DependentUpon>
-    </Compile>
     <Compile Include="Home.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,9 +130,6 @@
     <Compile Include="ViewApplication.Designer.cs">
       <DependentUpon>ViewApplication.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="EditApplication.resx">
-      <DependentUpon>EditApplication.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
     </EmbeddedResource>

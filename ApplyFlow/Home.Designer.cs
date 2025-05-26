@@ -35,12 +35,17 @@
             // 
             // dataGridApplications
             // 
+            this.dataGridApplications.AllowUserToAddRows = false;
+            this.dataGridApplications.AllowUserToDeleteRows = false;
+            this.dataGridApplications.AllowUserToResizeColumns = false;
+            this.dataGridApplications.AllowUserToResizeRows = false;
             this.dataGridApplications.BackgroundColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.dataGridApplications.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridApplications.GridColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.dataGridApplications.Location = new System.Drawing.Point(43, 92);
+            this.dataGridApplications.Location = new System.Drawing.Point(43, 97);
             this.dataGridApplications.Name = "dataGridApplications";
-            this.dataGridApplications.Size = new System.Drawing.Size(1046, 427);
+            this.dataGridApplications.ReadOnly = true;
+            this.dataGridApplications.Size = new System.Drawing.Size(1046, 421);
             this.dataGridApplications.TabIndex = 0;
             // 
             // buttonNewApplication
