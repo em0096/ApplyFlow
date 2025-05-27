@@ -32,10 +32,15 @@
             this.buttonNewApplication = new System.Windows.Forms.Button();
             this.User = new System.Windows.Forms.Label();
             this.Avg = new System.Windows.Forms.Label();
-            this.Jobs = new System.Windows.Forms.Label();
             this.SPD = new System.Windows.Forms.Label();
             this.listBoxCountry = new System.Windows.Forms.ListBox();
             this.listBoxInterviews = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.listBoxCityNow = new System.Windows.Forms.ListBox();
+            this.CurrentJobs = new System.Windows.Forms.Label();
+            this.CountJobsUser = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridApplications)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,27 +84,17 @@
             // 
             this.Avg.AutoSize = true;
             this.Avg.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Avg.Location = new System.Drawing.Point(33, 49);
+            this.Avg.Location = new System.Drawing.Point(19, 49);
             this.Avg.Name = "Avg";
             this.Avg.Size = new System.Drawing.Size(158, 25);
             this.Avg.TabIndex = 3;
             this.Avg.Text = " :Average Salary";
             // 
-            // Jobs
-            // 
-            this.Jobs.AutoSize = true;
-            this.Jobs.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Jobs.Location = new System.Drawing.Point(31, 92);
-            this.Jobs.Name = "Jobs";
-            this.Jobs.Size = new System.Drawing.Size(66, 25);
-            this.Jobs.TabIndex = 4;
-            this.Jobs.Text = " :Jobs";
-            // 
             // SPD
             // 
             this.SPD.AutoSize = true;
             this.SPD.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SPD.Location = new System.Drawing.Point(36, 135);
+            this.SPD.Location = new System.Drawing.Point(306, 49);
             this.SPD.Name = "SPD";
             this.SPD.Size = new System.Drawing.Size(246, 25);
             this.SPD.TabIndex = 5;
@@ -108,10 +103,11 @@
             // listBoxCountry
             // 
             this.listBoxCountry.FormattingEnabled = true;
-            this.listBoxCountry.Location = new System.Drawing.Point(16, 253);
+            this.listBoxCountry.Location = new System.Drawing.Point(308, 244);
             this.listBoxCountry.Name = "listBoxCountry";
-            this.listBoxCountry.Size = new System.Drawing.Size(214, 108);
+            this.listBoxCountry.Size = new System.Drawing.Size(283, 108);
             this.listBoxCountry.TabIndex = 6;
+            this.listBoxCountry.SelectedIndexChanged += new System.EventHandler(this.listBoxCountry_SelectedIndexChanged);
             // 
             // listBoxInterviews
             // 
@@ -121,16 +117,76 @@
             this.listBoxInterviews.Size = new System.Drawing.Size(575, 147);
             this.listBoxInterviews.TabIndex = 7;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(16, 353);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(106, 13);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Upcoming Interviews";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(308, 225);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(153, 13);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Count of Jobs per City, All Time";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(19, 225);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(199, 13);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Count of currently Available Jobs per City";
+            // 
+            // listBoxCityNow
+            // 
+            this.listBoxCityNow.FormattingEnabled = true;
+            this.listBoxCityNow.Location = new System.Drawing.Point(16, 244);
+            this.listBoxCityNow.Name = "listBoxCityNow";
+            this.listBoxCityNow.Size = new System.Drawing.Size(283, 108);
+            this.listBoxCityNow.TabIndex = 11;
+            // 
+            // CurrentJobs
+            // 
+            this.CurrentJobs.AutoSize = true;
+            this.CurrentJobs.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CurrentJobs.Location = new System.Drawing.Point(19, 92);
+            this.CurrentJobs.Name = "CurrentJobs";
+            this.CurrentJobs.Size = new System.Drawing.Size(187, 25);
+            this.CurrentJobs.TabIndex = 12;
+            this.CurrentJobs.Text = " :Currently Available";
+            // 
+            // CountJobsUser
+            // 
+            this.CountJobsUser.AutoSize = true;
+            this.CountJobsUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CountJobsUser.Location = new System.Drawing.Point(19, 127);
+            this.CountJobsUser.Name = "CountJobsUser";
+            this.CountJobsUser.Size = new System.Drawing.Size(197, 25);
+            this.CountJobsUser.TabIndex = 13;
+            this.CountJobsUser.Text = "# of Jobs Appiled For";
+            // 
             // FormHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1123, 558);
+            this.Controls.Add(this.CountJobsUser);
+            this.Controls.Add(this.CurrentJobs);
+            this.Controls.Add(this.listBoxCityNow);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.listBoxInterviews);
             this.Controls.Add(this.listBoxCountry);
             this.Controls.Add(this.SPD);
-            this.Controls.Add(this.Jobs);
             this.Controls.Add(this.Avg);
             this.Controls.Add(this.User);
             this.Controls.Add(this.buttonNewApplication);
@@ -149,9 +205,14 @@
         private System.Windows.Forms.Button buttonNewApplication;
         private System.Windows.Forms.Label User;
         private System.Windows.Forms.Label Avg;
-        private System.Windows.Forms.Label Jobs;
         private System.Windows.Forms.Label SPD;
         private System.Windows.Forms.ListBox listBoxCountry;
         private System.Windows.Forms.ListBox listBoxInterviews;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ListBox listBoxCityNow;
+        private System.Windows.Forms.Label CurrentJobs;
+        private System.Windows.Forms.Label CountJobsUser;
     }
 }

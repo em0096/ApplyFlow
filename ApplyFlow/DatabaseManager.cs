@@ -12,7 +12,7 @@ namespace ApplyFlow
 {
     internal class DatabaseManager
     {
-        private string connectionString = ConfigurationManager.ConnectionStrings["MyOracleDB"].ConnectionString;
+        private string connectionString = ConfigurationManager.ConnectionStrings["Compx323"].ConnectionString;
         private OracleConnection connection;
         private OracleCommand command;
         private OracleDataReader read;

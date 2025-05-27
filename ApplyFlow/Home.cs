@@ -17,43 +17,22 @@ namespace ApplyFlow
 
             InitializeComponent();
             LoadApplciations();
-            LoadStats();
             LoadCountry();
             LoadUpcomingInterviews();
             avgSalary();
             LoadApplicationStatusBreakdown();
             UpdateUser();
+            LoadAvailableJobsByCity();
+            LoadUserApplicationCount();
+            LoadCurrentlyAvailableJobCount();
         }
 
         public void UpdateUser()
         {
             string currentUser = ApplyFlow.User.GetInstance().GetUsername();
-            User.Text = currentUser;
+            User.Text = "Current User: " + currentUser;
         }
-        public void LoadStats()
-        {
-            try
-            {
-                string query = "SELECT COUNT(*) AS total_jobs FROM Job";
-                Dictionary<string, object> parameters = new Dictionary<string, object>();
-                DataTable result = dbManager.SelectQuery(query, parameters);
-
-                if (result != null && result.Rows.Count > 0)
-                {
-                    int totalJobs = Convert.ToInt32(result.Rows[0]["total_jobs"]);
-                    Jobs.Text = totalJobs.ToString() + ": Total Jobs";
-                }
-                else
-                {
-                    Jobs.Text = "N/A";
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error loading stats: " + ex.Message);
-                Jobs.Text = "Error";
-            }
-        }
+       
 
         public void avgSalary()
         {
@@ -75,7 +54,7 @@ namespace ApplyFlow
                 if (result != null && result.Rows.Count > 0)
                 {
                     string avgSalary = result.Rows[0]["average_salary"].ToString();
-                    Avg.Text = "$" + avgSalary.ToString() + "K";
+                    Avg.Text = "Average Salary: $" + avgSalary.ToString() + "K";
                 }
                 else
                 {
@@ -85,6 +64,88 @@ namespace ApplyFlow
             catch (Exception ex)
             {
                 MessageBox.Show("Error fetching average salary: " + ex.Message);
+            }
+        }
+
+        public void LoadUserApplicationCount()
+        {
+            try
+            {
+                string query = "SELECT COUNT(*) AS total_user_applications FROM Application WHERE username = :username";
+
+                Dictionary<string, object> parameters = new Dictionary<string, object>();
+                parameters.Add(":username", ApplyFlow.User.GetInstance().GetUsername());
+
+                DataTable result = dbManager.SelectQuery(query, parameters);
+
+                if (result != null && result.Rows.Count > 0)
+                {
+                    string total = result.Rows[0]["total_user_applications"].ToString();
+                    CountJobsUser.Text = total.ToString() + ": Total applications submitted";
+                }
+                else
+                {
+                    CountJobsUser.Text = "No applications found for this user.";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading application count: " + ex.Message);
+            }
+        }
+
+        public void LoadCurrentlyAvailableJobCount()
+        {
+            try
+            {
+                string query = "SELECT COUNT(*) AS currently_available_jobs FROM Job WHERE expiry_date > SYSDATE";
+
+                DataTable result = dbManager.SelectQuery(query, new Dictionary<string, object>());
+
+                if (result != null && result.Rows.Count > 0)
+                {
+                    string total = result.Rows[0]["currently_available_jobs"].ToString();
+                    CurrentJobs.Text = total.ToString() + ": Jobs currently available";
+                }
+                else
+                {
+                    CurrentJobs.Text = "No jobs are currently open";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading current job count: " + ex.Message);
+            }
+        }
+
+        public void LoadAvailableJobsByCity()
+        {
+            try
+            {
+                string query = "SELECT e.city, COUNT(*) AS available_jobs FROM Job j JOIN Employer e ON j.company_name = e.company_name WHERE j.expiry_date > SYSDATE GROUP BY e.city";
+
+                Dictionary<string, object> parameters = new Dictionary<string, object>();
+                DataTable result = dbManager.SelectQuery(query, parameters);
+
+                if (result != null && result.Rows.Count > 0)
+                {
+                    listBoxCityNow.Items.Clear();
+                    foreach (DataRow row in result.Rows)
+                    {
+                        string city = row["city"].ToString();
+                        string numberOfJobs = row["available_jobs"].ToString();
+                        listBoxCityNow.Items.Add("City: " + city + ", # Of Open Jobs: " + numberOfJobs);
+                    }
+                }
+                else
+                {
+                    listBoxCityNow.Items.Clear();
+                    listBoxCityNow.Items.Add("No currently available jobs found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading available jobs by country: " + ex.Message);
             }
         }
 
@@ -165,7 +226,7 @@ namespace ApplyFlow
                         }
                     }
 
-                    SPD.Text = $" Successful: {successful}\n Declined: {declined}\n Pending: {pending}";
+                    SPD.Text = $" Application Status Overview: \n Successful: {successful}\n Declined: {declined}\n Pending: {pending}";
                 }
                 else
                 {
@@ -289,6 +350,9 @@ namespace ApplyFlow
 
         }
 
+        private void listBoxCountry_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 }
